@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="cordova-plugin-hostedwebapp"
+    id="cordova-plugin-offline-page"
     version="0.1.4">
-    <name>HostedWebApp</name>
-    <description>Hosted Web App Plugin</description>
+    <name>Offline Page</name>
+    <description>An offline page for your cordova application.</description>
     <license>MIT License</license>
-    <keywords>cordova,manifest,hosted,web,manifoldjs</keywords>
-    <repo>https://github.com/manifoldjs/ManifoldCordova.git</repo>
-    <issue>https://github.com/manifoldjs/ManifoldCordova/issues</issue>
+    <keywords>cordova,offline</keywords>
+    <repo>https://github.com/Boltmade/cordova-plugin-offline-page</repo>
+    <issue>https://github.com/Boltmade/cordova-plugin-offline-page</issue>
 
-    <dependency id="cordova-plugin-whitelist" version=">=1.0.1" />
     <dependency id="cordova-plugin-network-information" version=">=1.0.0" />
 
-    <hook type="before_prepare" src="scripts/updateConfigurationBeforePrepare.js" />
-    <hook type="after_prepare" src="scripts/updateConfigurationAfterPrepare.js" />
-    <hook type="after_prepare" src="scripts/replaceWindowsWrapperFiles.js" />
-    <hook type="before_plugin_rm" src="scripts/rollbackWindowsWrapperFiles.js" />
-
-    <js-module src="www/hostedWebApp.js" name="hostedwebapp">
-        <clobbers target="hostedwebapp" />
+    <js-module src="www/offline.js" name="offlinepage">
+        <clobbers target="offlinepage" />
     </js-module>
 
     <engines>
@@ -30,8 +24,8 @@
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="HostedWebApp" >
-                <param name="android-package" value="com.manifoldjs.hostedwebapp.HostedWebApp"/>
+            <feature name="OfflinePage" >
+                <param name="android-package" value="com.manifoldjs.offlinepage.OfflinePage"/>
                 <param name="onload" value="true" />
             </feature>
         </config-file>
@@ -39,12 +33,12 @@
             <param name="onload" value="true" />
         </config-file>
 
-        <source-file src="src/android/HostedWebApp.java" target-dir="src/com/manifoldjs/hostedwebapp" />
+        <source-file src="src/android/OfflinePage.java" target-dir="src/com/manifoldjs/offlinepage" />
     </platform>
 
     <!-- windows -->
     <platform name="windows">
-      <js-module src="src/windows/HostedWebAppPluginProxy.js" name="HostedWebAppPluginProxy">
+      <js-module src="src/windows/OfflinePagePluginProxy.js" name="OfflinePagePluginProxy">
         <merges target="" />
       </js-module>
     </platform>
@@ -52,8 +46,8 @@
     <!-- ios -->
     <platform name="ios">
       <config-file target="config.xml" parent="/*">
-        <feature name="HostedWebApp">
-          <param name="ios-package" value="CDVHostedWebApp"/>
+        <feature name="OfflinePage">
+          <param name="ios-package" value="CDVOfflinePage"/>
           <param name="onload" value="true" />
         </feature>
       </config-file>
@@ -61,7 +55,7 @@
           <param name="onload" value="true" />
       </config-file>
 
-      <header-file src="src/ios/CDVHostedWebApp.h" />
-      <source-file src="src/ios/CDVHostedWebApp.m" />
+      <header-file src="src/ios/CDVOfflinePage.h" />
+      <source-file src="src/ios/CDVOfflinePage.m" />
     </platform>
 </plugin>
