@@ -17,12 +17,12 @@ Even though the following methods are available, it should be pointed out that c
 ### enableOfflinePage
 Enables offline page support.
 
-`hostedwebapp.enableOfflinePage()`
+`offlinepage.enableOfflinePage()`
 
 ### disableOfflinePage
 Disables offline page support.
 
-`hostedwebapp.disableOfflinePage()`
+`offlinepage.disableOfflinePage()`
 
 ## Supported Platforms
 iOS

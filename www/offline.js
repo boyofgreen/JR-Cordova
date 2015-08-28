@@ -1,9 +1,9 @@
 var offline = {
   enableOfflinePage : function () {
-    cordova.exec(undefined, undefined, "HostedWebApp", "enableOfflinePage", []);
+    cordova.exec(undefined, undefined, "OfflinePage", "enableOfflinePage", []);
   },
   disableOfflinePage : function () {
-    cordova.exec(undefined, undefined, "HostedWebApp", "disableOfflinePage", []);
+    cordova.exec(undefined, undefined, "OfflinePage", "disableOfflinePage", []);
   }
 }
 

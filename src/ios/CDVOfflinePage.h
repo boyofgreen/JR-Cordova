@@ -2,16 +2,16 @@
 
 #define kManifestLoadedNotification @"kManifestLoadedNotification"
 
-#define kCDVHostedWebAppWebViewDidStartLoad @"CDVHostedWebAppWebViewDidStartLoad"
-#define kCDVHostedWebAppWebViewShouldStartLoadWithRequest @"CDVHostedWebAppWebViewShouldStartLoadWithRequest"
-#define kCDVHostedWebAppWebViewDidFinishLoad @"CDVHostedWebAppWebViewDidFinishLoad"
-#define kCDVHostedWebAppWebViewDidFailLoadWithError @"CDVHostedWebAppWebViewDidFailLoadWithError"
+#define kCDVOfflinePageWebViewDidStartLoad @"CDVOfflinePageWebViewDidStartLoad"
+#define kCDVOfflinePageWebViewShouldStartLoadWithRequest @"CDVOfflinePageWebViewShouldStartLoadWithRequest"
+#define kCDVOfflinePageWebViewDidFinishLoad @"CDVOfflinePageWebViewDidFinishLoad"
+#define kCDVOfflinePageWebViewDidFailLoadWithError @"CDVOfflinePageWebViewDidFailLoadWithError"
 
 @interface CVDWebViewNotificationDelegate : NSObject <UIWebViewDelegate>
     @property (nonatomic,retain) id<UIWebViewDelegate> wrappedDelegate;
 @end
 
-@interface CDVHostedWebApp : CDVPlugin
+@interface CDVOfflinePage : CDVPlugin
 {
     CVDWebViewNotificationDelegate *notificationDelegate;
     NSDictionary *manifest;
