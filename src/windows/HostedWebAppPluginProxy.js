@@ -3,7 +3,7 @@ var _manifestError;
 var _offlineView;
 var _mainView;
 var _zIndex = 10000;
-var _enableOfflineSupport = true;
+var _enableOfflineSupport = false;
 var _lastKnownLocation;
 var _lastKnownLocationFailed = false;
 var _whiteList = [];
@@ -438,7 +438,9 @@ cordova.commandProxy.add('HostedWebApp', module.exports);
 
 module.exports.loadManifest(
     function (manifest) {
-        configureOfflineSupport('offline.html');
+        if (manifest.mjs_offline_feature) {
+            configureOfflineSupport('offline.html');
+        }
         configureWhiteList(manifest);
         _mainView = configureHost(manifest ? manifest.start_url : 'about:blank', _zIndex);
         _mainView.addEventListener("MSWebViewDOMContentLoaded", domContentLoadedEvent, false);

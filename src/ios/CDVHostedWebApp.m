@@ -54,9 +54,6 @@ static NSString * const defaultManifestFileName = @"manifest.json";
 {
     [super pluginInitialize];
 
-    // creates the UI to show offline mode
-    [self createOfflineView];
-
     // observe notifications from network-information plugin to detect when device is offline
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateConnectivityStatus:)
@@ -81,8 +78,8 @@ static NSString * const defaultManifestFileName = @"manifest.json";
                                                  name:kCDVHostedWebAppWebViewDidFailLoadWithError
                                                object:nil];
 
-    // enable offline support by default
-    self.enableOfflineSupport = YES;
+    // disable offline support by default
+    self.enableOfflineSupport = NO;
 
     // no connection errors on startup
     self.failedURL = nil;
@@ -94,6 +91,11 @@ static NSString * const defaultManifestFileName = @"manifest.json";
     notificationDelegate = [[CVDWebViewNotificationDelegate alloc] init];
     notificationDelegate.wrappedDelegate = self.webView.delegate;
     [self.webView setDelegate:notificationDelegate];
+
+    if ([[manifest objectForKey:@"mjs_offline_feature"] boolValue]) {
+        // creates the UI to show offline mode
+        [self createOfflineView];
+    }
 }
 
 // loads the specified W3C manifest
