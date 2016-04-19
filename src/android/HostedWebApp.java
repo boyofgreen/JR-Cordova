@@ -47,7 +47,7 @@ public class HostedWebApp extends CordovaPlugin {
 
     private LinearLayout rootLayout;
     private WebView offlineWebView;
-    private boolean offlineOverlayEnabled;
+    private boolean offlineOverlayEnabled = false;
 
     private boolean isConnectionError = false;
 
@@ -69,32 +69,34 @@ public class HostedWebApp extends CordovaPlugin {
 
         this.loadingManifest = false;
 
-        // Initialize offline overlay
-        this.activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (me.rootLayout == null) {
-                    me.rootLayout = me.createOfflineRootLayout();
-                    me.activity.addContentView(me.rootLayout, me.rootLayout.getLayoutParams());
-                }
+        if (this.manifestObject.optBoolean("mjs_offline_feature")) {
+            // Initialize offline overlay
+            this.activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (me.rootLayout == null) {
+                        me.rootLayout = me.createOfflineRootLayout();
+                        me.activity.addContentView(me.rootLayout, me.rootLayout.getLayoutParams());
+                    }
 
-                if (me.offlineWebView == null) {
-                    me.offlineWebView = me.createOfflineWebView();
-                    me.rootLayout.addView(me.offlineWebView);
-                }
+                    if (me.offlineWebView == null) {
+                        me.offlineWebView = me.createOfflineWebView();
+                        me.rootLayout.addView(me.offlineWebView);
+                    }
 
-                if (me.assetExists(HostedWebApp.OFFLINE_PAGE)) {
-                    me.offlineWebView.loadUrl("file:///android_asset/www/" + HostedWebApp.OFFLINE_PAGE);
-                } else {
-                    me.offlineWebView.loadData(
-                            String.format(HostedWebApp.OFFLINE_PAGE_TEMPLATE, "It looks like you are offline. Please reconnect to use this application."),
-                            "text/html",
-                            null);
-                }
+                    if (me.assetExists(HostedWebApp.OFFLINE_PAGE)) {
+                        me.offlineWebView.loadUrl("file:///android_asset/www/" + HostedWebApp.OFFLINE_PAGE);
+                    } else {
+                        me.offlineWebView.loadData(
+                                String.format(HostedWebApp.OFFLINE_PAGE_TEMPLATE, "It looks like you are offline. Please reconnect to use this application."),
+                                "text/html",
+                                null);
+                    }
 
-                me.offlineOverlayEnabled = true;
-            }
-        });
+                    me.offlineOverlayEnabled = true;
+                }
+            });
+        }
     }
 
     @Override
