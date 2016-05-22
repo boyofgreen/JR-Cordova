@@ -50,6 +50,7 @@ public class HostedWebApp extends CordovaPlugin {
     private boolean offlineOverlayEnabled;
 
     private boolean isConnectionError = false;
+    private boolean isClientMode = false;
 
     @Override
     public void pluginInitialize() {
@@ -157,8 +158,16 @@ public class HostedWebApp extends CordovaPlugin {
         }
 
 		if (action.equals("injectPluginScript")) {
+            String temp;
 			final List<String> scripts = new ArrayList<String>();
-			scripts.add(args.getString(0));
+            if(this.isClientMode){
+                String clientPlugin = args.getString(0);
+                int ind = clientPlugin.indexOf("plugin");
+                clientPlugin = clientPlugin.substring(ind);
+                scripts.add(clientPlugin);
+            }else{
+                scripts.add(args.getString(0));
+            }
 
             cordova.getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -305,10 +314,12 @@ public class HostedWebApp extends CordovaPlugin {
 
                 List<String> scriptList = new ArrayList<String>();
                 if (pluginMode.equals("client")) {
+                    this.isClientMode = true;
                     scriptList.add("cordova.js");
                 }
 
                 scriptList.add("hostedapp-bridge.js");
+                scriptList.add("cordova_plugins.js");
                 injectScripts(scriptList, null);
             }
         }
