@@ -158,7 +158,6 @@ public class HostedWebApp extends CordovaPlugin {
         }
 
 		if (action.equals("injectPluginScript")) {
-            String temp;
 			final List<String> scripts = new ArrayList<String>();
             if(this.isClientMode){
                 String clientPlugin = args.getString(0);
