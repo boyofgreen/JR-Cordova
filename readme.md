@@ -3,7 +3,7 @@
 -->
 
 # Hosted Web Application
-This plugin enables the creation of a hosted web application from a [W3C manifest](http://www.w3.org/2008/webapps/manifest/) that provides metadata associated with a web site. It uses properties in the manifest to update corresponding properties in the Cordova configuration file to enable using content hosted in the site inside a Cordova application.
+This plugin enables the creation of a hosted web application from a [W3C manifest](http://www.w3.org/2008/webapps/manifest/) that provides metadata associated with a web site. It uses properties in the manifest to update corresponding properties in the Cordova configuration file to enable using content hosted in the site inside a Cordova application. This version of the code works with Android 5.1.1 and below: the original code base only worked with Android 4.1.1 and below.
 
 **Typical manifest** 
 <pre>
