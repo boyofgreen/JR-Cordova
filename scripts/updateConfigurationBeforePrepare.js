@@ -180,7 +180,7 @@ function processAccessRules(manifest) {
         if (manifest.mjs_extended_scope && manifest.mjs_extended_scope instanceof Array) {
             manifest.mjs_extended_scope.forEach(function (item) {
                 // To avoid duplicates, add the rule only if it does not have the base URL as a prefix
-                if (item.indexOf(baseUrl) !== 0 ) {  
+                if (item.url.indexOf(baseUrl) !== 0 ) {  
                     // add as a navigation rule
                     var navigationEl = new etree.SubElement(config.doc.getroot(), 'allow-navigation');
                     navigationEl.set('hap-rule','yes');
