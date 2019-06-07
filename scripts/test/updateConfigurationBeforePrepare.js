@@ -47,12 +47,12 @@ function initializeContext(testDir) {
       return require('cordova-lib/node_modules/cordova-common');
     }
 
-    if (moduleName === 'cordova-lib/src/configparser/ConfigParser') {
-      return require('cordova-lib/src/configparser/ConfigParser');
+    if (moduleName === 'node_modules/cordova-common/src/ConfigParser') {
+      return require('node_modules/cordova-common/src/ConfigParser');
     }
 
-    if (moduleName === 'cordova-lib/node_modules/elementtree') {
-      return require('cordova-lib/node_modules/elementtree');
+    if (moduleName === 'elementtree') {
+      return require('elementtree');
     }
 
     if (requireCordovaModule) {

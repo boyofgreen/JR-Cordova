@@ -82,10 +82,16 @@ module.exports = function (context) {
     return;
   }
 
-  etree = context.requireCordovaModule('cordova-lib/node_modules/elementtree');
+  etree = require('elementtree');
   
   // move contents of the assets folder to the windows platform dir
-  var Q = context.requireCordovaModule('q');
+  try{
+		Q = require('q');
+	}catch(e){
+        e.message = 'Unable to load node module dependency \'q\': '+e.message;
+        log(e.message);
+        throw e;
+    }
 
   var filename = "wrapper";
 
